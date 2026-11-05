@@ -8,7 +8,7 @@
 
 **地区兼容部分移植自汐语（XiYu）3.0/code8**，对应 [`WalletRegionCompat.java`](wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java)。原分支为 `kg0/fg0/l9/db`，处理三星钱包、支付框架和银联组件的地区属性读取。Toolbox 将其适配为 Xposed API82，并补充初始化、签名检查和异常隔离。
 
-上游项目地址：<https://github.com/qiaoing888/XiYu>。2026-11-05 查询返回 404；历史材料记录有 GPLv3 引用，完整上游许可文本及适用范围尚未独立核验。源码头部、[NOTICE](NOTICE.md) 和[来源清单](provenance/xiyu.json)均保留说明。没有把整个工程冒称为汐语代码，也没有擅自给混合来源代码指定统一许可证。
+上游项目地址：<https://github.com/qiaoing888/XiYu>。历史材料记录有 GPLv3 引用，完整上游许可文本及适用范围尚未独立核验。源码头部、[NOTICE](NOTICE.md) 和[来源清单](provenance/xiyu.json)均保留说明。没有把整个工程冒称为汐语代码，也没有擅自给混合来源代码指定统一许可证。
 
 ## 内容
 
@@ -16,13 +16,12 @@
 | --- | --- | --- |
 | 三组件地区兼容 | `WalletRegionCompat` | 汐语移植；仅改目标进程 getter 结果 |
 | 交通卡入口、城市及卡种目录 | `WalletTransitEntryCompat` | 入口和目录分别处理，保留实际服务判断 |
-| 北京学生卡兼容 | `BeijingStudentCardCompat` | 钱包端按调用者和校园卡请求限定范围，不注入北京一卡通 |
+| 北京一卡通校园卡地区识别兼容 | `BeijingStudentCardCompat` | 仅在匹配的校园卡资格校验中将 carrierid 的 TGY 局部映射为 CHC，不注入北京一卡通 |
 | NFC 读写开关误报 | `WalletAccessNfcCompat` | 门卡、银行卡选择页；不全局屏蔽提醒 |
 | 门禁卡自定义卡面 | `WalletCardArtCompat` 等 | 原生设计页增加自定义、相册、裁剪、卡面库和长按删除 |
 | 公交卡独立设计页 | `WalletTransitDesignModule` 等 | 独立 Activity/编辑状态，预览后保存；恢复默认、交通联合标识设置 |
 | 刷卡弹出卡面 | `WalletTapArtCompat` | 直接使用刷卡小窗的实际卡片对象，不按图片反查 |
 | 国行钱包 Samsung Pass | `WalletPass*`、`PassPreparationState` | 真实注册、原生引导、云恢复、连接、快速访问确认与刷新 |
-| 组件下载接口 | `WalletDownloadsActivity`、`wallet_downloads.xml` | 钱包、框架、银联三个空地址接口 |
 
 交通卡、学生卡、NFC、卡面与 Pass 是 Toolbox 中结合当前钱包原生行为另行实现的部分，不属于此次汐语地区分支移植。八达通保留原生判断，仓库不带强制开启或隐藏入口的实验 Hook。
 
@@ -33,7 +32,6 @@
 | 设备 | Samsung SM-S9180 |
 | 国行 Wallet | 5.5.97 / 559700323 |
 | Samsung Pass | 5.2.10.10 / 521010900 |
-| 用户空间 | Android user 0 |
 | 编译 | JDK21、SDK36、Gradle8.13、AGP8.9.2 |
 
 多个实现带精确机型/版本守卫，NFC 修正还要求 API35+。`minSdk29` 是编译下限，不等于所有机型和系统均可用。移植到其他版本需核对原生类、混淆签名和行为，不能只删版本判断。

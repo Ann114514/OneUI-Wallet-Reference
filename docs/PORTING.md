@@ -32,9 +32,8 @@ Java 包路径保留为 `dev.oneui.toolbox.samsung.wallet`，资源 namespace �
 
 1. `WalletTransitCardLogo.PACKAGE` 从模块 APK assets 读取 `transit_union_logo.png`，需换成自己的宿主 applicationId。
 2. `WalletTransitDesignModule` 中的 `createPackageContext("dev.oneui.toolbox", 0)` 从模块 assets 读取 `transit_design_activity.dex`，也要换成自己的 applicationId。
-3. 如果更改资源 namespace，需同步 `WalletDownloadsActivity` 的 `dev.oneui.toolbox.R` 导入。
-4. 如果给独立 Activity 改类名或包路径，需同步 `src/transitDesign` 的 package 以及 `WalletTransitDesignModule.ENTRY`。这个类不应直接编进宿主的主 DEX。
-5. 若要改 `dev.oneui.toolbox.action.PASS_RESTORE_READY` 提示 action，发送和接收两端必须一致。它不携带敏感数据，接收后仍重新读取原生权限保护的状态。
+3. 如果给独立 Activity 改类名或包路径，需同步 `src/transitDesign` 的 package 以及 `WalletTransitDesignModule.ENTRY`。这个类不应直接编进宿主的主 DEX。
+4. 若要改 `dev.oneui.toolbox.action.PASS_RESTORE_READY` 提示 action，发送和接收两端必须一致。它不携带敏感数据，接收后仍重新读取原生权限保护的状态。
 
 原项目的硬编码保留是为了对应实现，不代表移植者可以省略上述修改。
 
@@ -54,8 +53,6 @@ Java 包路径保留为 `dev.oneui.toolbox.samsung.wallet`，资源 namespace �
 
 SM-S9180、559700323、521010900 等守卫是实际适配边界。更换版本后，分别核对签名、字段、资源、调用者限制及数据语义。原生签名/认证检查和服务端结果保留；不要通过伪造成功或跳过认证来掩盖接口不匹配。
 
-## 可选下载界面
+## 构建依赖
 
-`WalletDownloadsActivity` 需要宿主的 Material3/AppCompat 主题。`wallet_downloads.xml` 中三个地址默认空，按钮不可用；填入自己有权提供的地址即可。页面只打开下载页，不执行 APK 安装。
-
-Xposed API82 仅为 compileOnly，不能打入模块；Material1.14.0、AppCompat1.7.0 由构建系统获取。首次构建需要可访问对应 Maven 仓库；`--offline` 仅适用于依赖已经缓存的机器。
+Xposed API82 仅为 compileOnly，不能打入模块。首次构建需要可访问对应 Maven 仓库；`--offline` 仅适用于依赖已经缓存的机器。独立公交卡页面在运行时使用钱包提供的原生基类和 AndroidX 返回接口，不额外打包这些库。

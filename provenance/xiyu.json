@@ -3,7 +3,6 @@
   "sourceVersion": "3.0/code8",
   "sourcePackage": "com.keyscafe.unlock",
   "upstreamUrl": "https://github.com/qiaoing888/XiYu",
-  "upstreamStatusChecked": "2026-11-05: GitHub API HTTP 404",
   "originalBranch": "kg0/fg0/l9/db wallet region getter mapping",
   "portedFile": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java",
   "targets": [

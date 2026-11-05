@@ -4,7 +4,7 @@
 
 **文件**：`wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java`。
 
-地区兼容行为移植自汐语 **3.0/code8**（源应用包名 `com.keyscafe.unlock`）钱包分支 `kg0/fg0/l9/db`。上游材料内记录的项目地址是 <https://github.com/qiaoing888/XiYu>；2026-11-05 使用 GitHub API 查询返回404。
+地区兼容行为移植自汐语 **3.0/code8**（源应用包名 `com.keyscafe.unlock`）钱包分支 `kg0/fg0/l9/db`。上游材料内记录的项目地址是 <https://github.com/qiaoing888/XiYu>。
 
 移植范围是三星钱包、三星支付框架、银联可信服务组件三个进程中的地区属性读取映射：五个地区属性，以及 Samsung helper 的三个地区 getter，返回 CHC/CN/China。未写入全局系统属性。Toolbox 另做 Xposed API82 接入、返回类型/签名保护、初始化和异常隔离适配。
 
@@ -22,7 +22,6 @@
 | --- | --- |
 | Gradle Wrapper | Gradle项目构建引导文件，保留脚本版权头；按其Apache-2.0许可及通知分发，许可副本位于 `licenses/Gradle-LICENSE`，取自 <https://github.com/gradle/gradle/blob/v8.13.0/LICENSE> |
 | Xposed API82 | compileOnly，仓库不随附API JAR；<https://github.com/rovo89/XposedBridge> |
-| AndroidX AppCompat / Material Components | 通过Maven获取，适用各自许可；<https://github.com/androidx/androidx>、<https://github.com/material-components/material-components-android> |
 | 交通联合PNG | 原使用者提供的标识素材，仅作卡面显示；标识和商标权属于相应权利人，本仓库不另行授权 |
 | Samsung Wallet/Pass及其接口名 | 用于说明兼容目标，项目不是三星官方产品，不分发三星APK/DEX、证书或服务端数据 |
 

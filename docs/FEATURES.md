@@ -4,7 +4,7 @@
 | --- | --- | --- |
 | 汐语地区分支 | `WalletRegionCompat` | 三目标进程的五个地区属性、三个 Samsung 地区 getter；CHC/CN/China；不写系统属性 |
 | 交通卡入口和目录 | `WalletTransitEntryCompat` | 原生菜单能力和城市目录分别适配，运营商别名限制在对应调用作用域 |
-| 钱包端北京校园卡 | `BeijingStudentCardCompat` | 按 Binder 调用者、校园卡 issuer 和指定原生回调限定范围 |
+| 北京一卡通校园卡地区识别 | `BeijingStudentCardCompat` | 在指定资格校验中局部映射 carrierid；匹配北京一卡通调用者、校园卡 issuer 和原生回调 |
 | NFC 误报 | `WalletAccessNfcCompat` | 只在门卡读取和银行选择页，区分独立开关支持状态与实际读写开启状态 |
 | 门卡自定义设计 | `WalletCardArtCompat`、`WalletCardArtCropView`、`WalletCardArtLibraryView`、`WalletCardArtNameContrast` | 沿用原生编辑页面，提交成功后保存私有应用副本，保留选择/裁剪/删除与名称对比度 |
 | 公交卡独立设计 | `WalletTransitCardArtCompat`、`WalletTransitDesignModule`、`TransitDesignActivity` | 详情页入口，独立 Activity 和草稿状态；无顶部分类和名称区域；恢复默认及 Logo 选项位于页内 |
@@ -14,6 +14,10 @@
 | Pass 兼容 | `WalletPass*`、`PassPreparationState` | 见专门的流程文档 |
 
 上述其他功能不是汐语地区分支自带的 Hook。相关混淆类与函数名仅对应当前钱包版本。
+
+## 校园卡地区识别
+
+实际修正的是钱包读取的 `ro.boot.carrierid`：仅在指定校园卡资格校验期间将 `TGY` 返回为 `CHC`，不写系统属性。触发必须同时匹配调用方 `cn.com.bmac.nfc`、请求 `BEIJING_MOT_V2_CAMPUS` 和卡类型 `TRANSIT_CARD_TYPE_BJMOT_V2`。因此“北京”来自实际调用链条件，不是新增入口名称，也不是按手机所在地限制；其他校园卡流程不会命中此 Hook，不能据此宣称通用兼容。
 
 ## 刷卡卡面
 

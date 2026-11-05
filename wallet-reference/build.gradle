@@ -17,8 +17,6 @@ dependencies {
     } else {
         compileOnly 'de.robv.android.xposed:api:82'
     }
-    implementation 'com.google.android.material:material:1.14.0'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
 }
 
 // A tiny independent Activity links to Wallet's real base at runtime. Compile-only

@@ -5,7 +5,7 @@
     "task": ":wallet-reference:assembleDebug",
     "result": "BUILD SUCCESSFUL",
     "xposedApi": "Local API82 JAR, compileOnly; no API JAR bundled",
-    "aarSha256": "8b7cb56532c49ab2d5f37214870000f2cc19b97580c9625eca04b03f56f8895c",
+    "aarSha256": "78688c7f03ebe7420c27bc2c9105050d787e7a85148bc20db31be850da609eda",
     "activityAssetClasses": [
       "Ldev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity$1;",
       "Ldev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity;"
@@ -14,13 +14,13 @@
     "logoAssetMatchesSource": true
   },
   "sourceSnapshot": {
-    "walletJavaFiles": 23,
-    "copiedFileHashesVerified": 42,
+    "walletJavaFiles": 22,
+    "copiedFileHashesVerified": 39,
     "onlyBusinessSourceExportChange": "WalletRegionCompat attribution comment",
     "gitPreservesSnapshotBytes": true
   },
   "publicationScope": {
-    "candidateTrackedFiles": 56,
+    "candidateTrackedFiles": 53,
     "onlyBinarySourceFiles": [
       "gradle/wrapper/gradle-wrapper.jar",
       "wallet-reference/src/main/assets/transit_union_logo.png"

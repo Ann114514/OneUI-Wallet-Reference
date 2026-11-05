@@ -5,10 +5,11 @@
   "snapshotDate": "2026-11-05",
   "sourceBaseline": "0.1.2-test92 plus wallet-only cleanup",
   "type": "Android source reference library; not an installable APK",
-  "walletJavaFiles": 23,
+  "walletJavaFiles": 22,
   "exportChanges": [
     "WalletRegionCompat attribution comment only; reference build files and examples are packaging additions",
-    "PASS-FLOW waiting UI paragraph describes current behavior without historic test iteration labels"
+    "PASS-FLOW waiting UI paragraph describes current behavior without historic test iteration labels",
+    "Reference library excludes the Toolbox host component acquisition UI and its dedicated resources/dependencies; library manifest is empty"
   ],
   "files": [
     {
@@ -65,13 +66,6 @@
       "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtStore.java",
       "sourceSha256": "757ddedfa03457e6ae5c0b49c9f3c71d4b3ce618300299720d47b62b33045a26",
       "sha256": "757ddedfa03457e6ae5c0b49c9f3c71d4b3ce618300299720d47b62b33045a26",
-      "modifiedForExport": false
-    },
-    {
-      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletDownloadsActivity.java",
-      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletDownloadsActivity.java",
-      "sourceSha256": "11e2511b246b7cabfa9fc838f27b90b618bc75f73f471720a74d310d28a98038",
-      "sha256": "11e2511b246b7cabfa9fc838f27b90b618bc75f73f471720a74d310d28a98038",
       "modifiedForExport": false
     },
     {
@@ -215,20 +209,6 @@
       "modifiedForExport": false
     },
     {
-      "source": "app/src/main/res/values/wallet_downloads.xml",
-      "path": "wallet-reference/src/main/res/values/wallet_downloads.xml",
-      "sourceSha256": "fc2b255997932e8cf973cefc3a48be207671109b354965d37c0b92b7d542fc0c",
-      "sha256": "fc2b255997932e8cf973cefc3a48be207671109b354965d37c0b92b7d542fc0c",
-      "modifiedForExport": false
-    },
-    {
-      "source": "app/src/main/res/drawable/ic_arrow_back.xml",
-      "path": "wallet-reference/src/main/res/drawable/ic_arrow_back.xml",
-      "sourceSha256": "43298ed6c9c655c0df2c91242199eb31e9b010d6d2ed6c42144fdf627ad30bfb",
-      "sha256": "43298ed6c9c655c0df2c91242199eb31e9b010d6d2ed6c42144fdf627ad30bfb",
-      "modifiedForExport": false
-    },
-    {
       "source": "gradlew",
       "path": "gradlew",
       "sourceSha256": "d2f351cc4d1d088f1ca59c12df28ec27dacc43a97607c056b0c0d549eda44a13",
@@ -295,8 +275,8 @@
       "source": "wallet-porting-reference/wallet-reference/src/main/AndroidManifest.xml",
       "path": "wallet-reference/src/main/AndroidManifest.xml",
       "sourceSha256": "184bb1e5ad4625dd2e97a99119b6486aa8fd99b65908f7205d5d436e6ffa628e",
-      "sha256": "184bb1e5ad4625dd2e97a99119b6486aa8fd99b65908f7205d5d436e6ffa628e",
-      "modifiedForExport": false
+      "sha256": "d0a22357e76c00eff5315795eaf0f5127dee821a6235046608e8c5b7bc7bbe98",
+      "modifiedForExport": true
     },
     {
       "source": "gradle.properties",
