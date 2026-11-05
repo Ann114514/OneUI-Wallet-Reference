@@ -10,6 +10,7 @@ import android.util.Log;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,13 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-/** Only the BMAC campus eligibility callback sees a local carrier alias. */
-public final class BeijingStudentCardCompat {
+/** Only a supported, natively authorized campus/transit callback sees a local carrier alias. */
+public final class WalletCampusCardCompat {
     private static final String PACKAGE = "com.samsung.android.spay";
     private static final String TRANSIT = PACKAGE + ".vas.transportcard.";
     private static final String CONTROLLER = TRANSIT + "sdk.controller.";
-    private static final String MARK = "OneUIToolboxBeijingStudentScope";
-    private static final String TAG = "OneUIToolboxStudent";
+    private static final String MARK = "OneUIToolboxCampusScope";
+    private static final String TAG = "OneUIToolboxCampus";
     private static final AtomicBoolean WATCHING = new AtomicBoolean();
     private static final ThreadLocal<Scope> REQUEST = new ThreadLocal<>();
     private static final ThreadLocal<Scope> CALLBACK = new ThreadLocal<>();
@@ -35,7 +36,7 @@ public final class BeijingStudentCardCompat {
     private static final XC_MethodHook.Unhook[] WATCHERS = new XC_MethodHook.Unhook[2];
     private static int attempts;
     private static boolean installed;
-    private BeijingStudentCardCompat() { }
+    private WalletCampusCardCompat() { }
 
     public static void install(XC_LoadPackage.LoadPackageParam target) {
         if (!PACKAGE.equals(target.packageName) || Process.myUid() / 100000 != 0
@@ -88,8 +89,9 @@ public final class BeijingStudentCardCompat {
 
     private static final class State {
         final Context context;
-        final Class<?> callbackClass, issueCallbackClass, enumClass;
-        final Method binderEntry, issueEntry, preCheck, onSuccess, issueOnSuccess,
+        final ClassLoader loader;
+        final Class<?> callbackClass, issueCallbackClass, preIssueCallbackClass, enumClass;
+        final Method preCheck, onSuccess, issueOnSuccess, preIssueOnSuccess,
                 cityCheck, cityPref, cardName, factory;
         final Class<?> decoderClass;
         volatile boolean active, getterReady;
@@ -97,17 +99,17 @@ public final class BeijingStudentCardCompat {
 
         State(Context owner, ClassLoader loader) throws Exception {
             context = owner;
+            this.loader = loader;
             callbackClass = Class.forName(CONTROLLER + "TransitAidlBaseController$9", false, loader);
             issueCallbackClass = Class.forName(CONTROLLER + "TransitAidlBaseController$4", false, loader);
+            preIssueCallbackClass = Class.forName(CONTROLLER + "TransitAidlBaseController$3", false, loader);
             enumClass = Class.forName(TRANSIT + "appInterface.model.ETransitCardType", false, loader);
             Class<?> result = Class.forName(TRANSIT + "sdk.interfaces.ResultCallback", false, loader);
-            binderEntry = Class.forName(CONTROLLER + "cmn.TransitAidlCmnController$TransitCmnStub", false, loader)
-                    .getDeclaredMethod("checkIssueConditions", Map.class);
-            issueEntry = binderEntry.getDeclaringClass().getDeclaredMethod("issueCard", Map.class);
             preCheck = Class.forName(CONTROLLER + "TransitAidlBaseController", false, loader)
                     .getDeclaredMethod("preCheckEligibility", result, enumClass, String.class, Object[].class);
             onSuccess = callbackClass.getDeclaredMethod("onSuccess", Object.class);
             issueOnSuccess = issueCallbackClass.getDeclaredMethod("onSuccess", Object.class);
+            preIssueOnSuccess = preIssueCallbackClass.getDeclaredMethod("onSuccess", Object.class);
             cityCheck = Class.forName(TRANSIT + "utils.TransitUtils", false, loader)
                     .getDeclaredMethod("I", String.class);
             cityPref = Class.forName(PACKAGE + ".common.util.pref.CNTransitPref", false, loader)
@@ -123,53 +125,34 @@ public final class BeijingStudentCardCompat {
         void install() throws Throwable {
             List<XC_MethodHook.Unhook> hooks = new ArrayList<>();
             try {
-                for (Method entry : new Method[]{binderEntry, issueEntry}) {
-                final Class<?> expectedCallback = entry == binderEntry ? callbackClass : issueCallbackClass;
-                hooks.add(XposedBridge.hookMethod(entry, new XC_MethodHook() {
-                    @Override protected void beforeHookedMethod(MethodHookParam call) {
-                        if (!active) return;
-                        enter(call, "request", REQUEST, null);
-                        try {
-                            if (!isBmacCaller()) return;
-                            Object issuer = call.args[0] instanceof Map
-                                    ? ((Map<?, ?>) call.args[0]).get("issuerID") : null;
-                            boolean campus = "BEIJING_MOT_V2_CAMPUS".equals(issuer);
-                            report("BMAC " + entry.getName() + " eligibleCampus=" + campus);
-                            if (campus) REQUEST.set(new Scope(null, expectedCallback));
-                        } catch (Throwable ignored) { }
-                    }
-                    @Override protected void afterHookedMethod(MethodHookParam call) {
-                        restore(call, "request", REQUEST);
-                    }
-                }));
-                }
                 hooks.add(XposedBridge.hookMethod(preCheck, new XC_MethodHook() {
                     @Override protected void beforeHookedMethod(MethodHookParam call) {
                         try {
                             if (!active || call.args[0] == null
                                     || (call.args[0].getClass() != callbackClass
-                                    && call.args[0].getClass() != issueCallbackClass)) return;
+                                    && call.args[0].getClass() != issueCallbackClass
+                                    && call.args[0].getClass() != preIssueCallbackClass)) return;
                             XposedHelpers.removeAdditionalInstanceField(call.args[0], MARK);
-                            Object bj = XposedHelpers.getStaticObjectField(enumClass, "TRANSIT_CARD_TYPE_BJMOT_V2");
                             Scope request = REQUEST.get();
                             if (request == null || request.callbackType != call.args[0].getClass()
-                                    || call.args[1] != bj) return;
-                            Object city = cardName.invoke(bj);
+                                    || call.args[1] != request.cardType) return;
+                            Object city = cardName.invoke(request.cardType);
                             if (!(city instanceof String) || ((String) city).isEmpty()) return;
                             XposedHelpers.setAdditionalInstanceField(call.args[0], MARK,
-                                    new Scope((String) city, request.callbackType));
+                                    new Scope((String) city, request.cardType, request.callbackType));
                             report("campus callback marked=" + request.callbackType.getSimpleName());
                         } catch (Throwable ignored) { }
                     }
                 }));
-                for (Method success : new Method[]{onSuccess, issueOnSuccess}) {
+                for (Method success : new Method[]{onSuccess, issueOnSuccess, preIssueOnSuccess}) {
                 hooks.add(XposedBridge.hookMethod(success, new XC_MethodHook() {
                     @Override protected void beforeHookedMethod(MethodHookParam call) {
                         if (!active) return;
                         enter(call, "callback", CALLBACK, null);
                         try {
                             Object mark = XposedHelpers.getAdditionalInstanceField(call.thisObject, MARK);
-                            if (mark instanceof Scope) CALLBACK.set((Scope) mark);
+                            if (mark instanceof Scope && ((Scope) mark).callbackType == call.thisObject.getClass())
+                                CALLBACK.set((Scope) mark);
                         } catch (Throwable ignored) { }
                     }
                     @Override protected void afterHookedMethod(MethodHookParam call) {
@@ -207,6 +190,14 @@ public final class BeijingStudentCardCompat {
                         } catch (Throwable ignored) { }
                     }
                 }));
+                boolean cmn = installEntries(false,
+                        "cmn.TransitAidlCmnController$TransitCmnStub", Map.class,
+                        new String[]{"checkIssueConditions", "issueCard", "preIssueCard"},
+                        new String[]{"TRANSIT_CARD_TYPE_BJMOT_V2", "TRANSIT_CARD_TYPE_BJMOT_XJT"}, hooks);
+                boolean sptc = installEntries(true,
+                        "sptc.TransitAidlSptcController$TransitSptcStub", HashMap.class,
+                        new String[]{"f", "c", "n4"}, new String[]{"TRANSIT_CARD_TYPE_SHMOT"}, hooks);
+                if (!cmn && !sptc) throw new NoSuchMethodException("No supported campus route");
                 active = true;
             } catch (Throwable error) {
                 for (XC_MethodHook.Unhook hook : hooks) try { hook.unhook(); } catch (Throwable ignored) { }
@@ -214,11 +205,69 @@ public final class BeijingStudentCardCompat {
             }
         }
 
-        boolean isBmacCaller() {
+        boolean installEntries(boolean sptc, String stubName, Class<?> mapType,
+                               String[] methodNames, String[] cardFields,
+                               List<XC_MethodHook.Unhook> installedHooks) {
+            String route = sptc ? "SPTC" : "CMN";
+            List<XC_MethodHook.Unhook> hooks = new ArrayList<>();
+            try {
+                final Map<String, Object> cards = new HashMap<>();
+                for (String field : cardFields) {
+                    try {
+                        Object card = XposedHelpers.getStaticObjectField(enumClass, field);
+                        if (card != null && enumClass.isInstance(card)) cards.put(field, card);
+                    } catch (Throwable ignored) { }
+                }
+                if (cards.isEmpty()) throw new NoSuchFieldException();
+                Class<?> stub = Class.forName(CONTROLLER + stubName, false, loader);
+                Method[] entries = new Method[methodNames.length];
+                for (int index = 0; index < methodNames.length; index++) {
+                    entries[index] = stub.getDeclaredMethod(methodNames[index], mapType);
+                    if (entries[index].getReturnType() != String.class
+                            || Modifier.isStatic(entries[index].getModifiers())) throw new NoSuchMethodException();
+                }
+                Class<?>[] callbacks = {callbackClass, issueCallbackClass, preIssueCallbackClass};
+                for (int index = 0; index < entries.length; index++) {
+                    final Method entry = entries[index];
+                    final Class<?> expectedCallback = callbacks[index];
+                    hooks.add(XposedBridge.hookMethod(entry, new XC_MethodHook() {
+                        @Override protected void beforeHookedMethod(MethodHookParam call) {
+                            if (!active) return;
+                            enter(call, "request", REQUEST, null);
+                            try {
+                                String caller = externalCaller();
+                                Object issuer = call.args[0] instanceof Map
+                                        ? ((Map<?, ?>) call.args[0]).get("issuerID") : null;
+                                String field = cardFieldFor(sptc, caller,
+                                        issuer instanceof String ? (String) issuer : null);
+                                Object card = field == null ? null : cards.get(field);
+                                if (card == null) return;
+                                REQUEST.set(new Scope(null, card, expectedCallback));
+                                report("campus " + route + " " + entry.getName() + " request matched");
+                            } catch (Throwable ignored) { }
+                        }
+                        @Override protected void afterHookedMethod(MethodHookParam call) {
+                            restore(call, "request", REQUEST);
+                        }
+                    }));
+                }
+                installedHooks.addAll(hooks);
+                report("campus " + route + " request hooks ready");
+                return true;
+            } catch (Throwable error) {
+                for (XC_MethodHook.Unhook hook : hooks) try { hook.unhook(); } catch (Throwable ignored) { }
+                report("campus " + route + " route unavailable; native retained");
+                return false;
+            }
+        }
+
+        String externalCaller() {
             int uid = Binder.getCallingUid();
-            if (uid / 100000 != 0) return false;
+            if (uid / 100000 != 0 || uid == Process.myUid()) return null;
             String[] packages = context.getPackageManager().getPackagesForUid(uid);
-            return packages != null && packages.length == 1 && "cn.com.bmac.nfc".equals(packages[0]);
+            if (packages == null || packages.length != 1 || packages[0] == null
+                    || packages[0].isEmpty() || PACKAGE.equals(packages[0])) return null;
+            return packages[0];
         }
 
         synchronized boolean prepareGetter() throws Exception {
@@ -262,8 +311,22 @@ public final class BeijingStudentCardCompat {
 
     private static final class Scope {
         final String city;
+        final Object cardType;
         final Class<?> callbackType;
-        Scope(String value, Class<?> handler) { city = value; callbackType = handler; }
+        Scope(String value, Object card, Class<?> handler) {
+            city = value; cardType = card; callbackType = handler;
+        }
+    }
+
+    // Route selection only. UID isolation and native partner authorization are separate checks.
+    static String cardFieldFor(boolean sptc, String caller, String issuer) {
+        if (caller == null || caller.isEmpty() || PACKAGE.equals(caller)) return null;
+        if (sptc) return "SHT_2IN1".equals(issuer) ? "TRANSIT_CARD_TYPE_SHMOT" : null;
+        if ("cn.com.bmac.nfc".equals(caller) && "BEIJING_MOT_V2_CAMPUS".equals(issuer))
+            return "TRANSIT_CARD_TYPE_BJMOT_V2";
+        if ("cn.com.bmac.xjt".equals(caller) && "BEIJING_MOT_V2_XJT".equals(issuer))
+            return "TRANSIT_CARD_TYPE_BJMOT_XJT";
+        return null;
     }
     private static void enter(XC_MethodHook.MethodHookParam call, String key, ThreadLocal<Scope> local, Scope next) {
         call.setObjectExtra(key, local.get());

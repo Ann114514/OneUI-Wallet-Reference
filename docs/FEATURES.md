@@ -4,7 +4,7 @@
 | --- | --- | --- |
 | 汐语地区分支 | `WalletRegionCompat` | 三目标进程的五个地区属性、三个 Samsung 地区 getter；CHC/CN/China；不写系统属性 |
 | 交通卡入口和目录 | `WalletTransitEntryCompat` | 原生菜单能力和城市目录分别适配，运营商别名限制在对应调用作用域 |
-| 北京一卡通校园卡地区识别 | `BeijingStudentCardCompat` | 在指定资格校验中局部映射 carrierid；匹配北京一卡通调用者、校园卡 issuer 和原生回调 |
+| 校园卡地区识别 | `WalletCampusCardCompat` | 北京一卡通、校际通与上海校园联名卡三条已确认接口；仅作用于授权后的指定地区校验 |
 | NFC 误报 | `WalletAccessNfcCompat` | 只在门卡读取和银行选择页，区分独立开关支持状态与实际读写开启状态 |
 | 门卡自定义设计 | `WalletCardArtCompat`、`WalletCardArtCropView`、`WalletCardArtLibraryView`、`WalletCardArtNameContrast` | 沿用原生编辑页面，提交成功后保存私有应用副本，保留选择/裁剪/删除与名称对比度 |
 | 公交卡独立设计 | `WalletTransitCardArtCompat`、`WalletTransitDesignModule`、`TransitDesignActivity` | 详情页入口，独立 Activity 和草稿状态；无顶部分类和名称区域；恢复默认及 Logo 选项位于页内 |
@@ -17,7 +17,17 @@
 
 ## 校园卡地区识别
 
-实际修正的是钱包读取的 `ro.boot.carrierid`：仅在指定校园卡资格校验期间将 `TGY` 返回为 `CHC`，不写系统属性。触发必须同时匹配调用方 `cn.com.bmac.nfc`、请求 `BEIJING_MOT_V2_CAMPUS` 和卡类型 `TRANSIT_CARD_TYPE_BJMOT_V2`。因此“北京”来自实际调用链条件，不是新增入口名称，也不是按手机所在地限制；其他校园卡流程不会命中此 Hook，不能据此宣称通用兼容。
+实际修正的是钱包读取的 `ro.boot.carrierid`：仅在指定校园卡资格校验期间将 `TGY` 返回为 `CHC`，不写系统属性。当前接入关系如下：
+
+| 渠道 | 原生请求 | 卡类型 |
+| --- | --- | --- |
+| 北京一卡通 | `cn.com.bmac.nfc` 调用 CMN，issuer 为 `BEIJING_MOT_V2_CAMPUS` | `TRANSIT_CARD_TYPE_BJMOT_V2` |
+| 校际通 | `cn.com.bmac.xjt` 调用 CMN，issuer 为 `BEIJING_MOT_V2_XJT` | `TRANSIT_CARD_TYPE_BJMOT_XJT` |
+| 上海交通卡校园联名卡 | SPTC 接口，issuer 为 `SHT_2IN1`；调用方仍须通过钱包原生签名/服务授权 | `TRANSIT_CARD_TYPE_SHMOT` |
+
+三个渠道均覆盖检查、预发卡和发卡的成功授权回调；卡类型、issuer、请求和回调必须对应。原生校验完成后，才在指定城市检查内局部映射；不改签名验证、学校资格或发卡结果。校际通的原生 issuer 使用北京服务标识，不代表只限北京或西安。
+
+这是当前代码可确认的三条接入路径，不能当作完整校园卡 App 目录。校园卡目录的数据模型是可变列表，本地配置未列出完整名单。CMN 的 `cn.com.whty.cqt` / `CHONGQING` 属普通交通卡接入，当前不因共用接口而列入校园卡修补。
 
 ## 刷卡卡面
 

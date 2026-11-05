@@ -1,9 +1,9 @@
 {
   "name": "OneUI Wallet Reference",
-  "sourceVersion": "0.1.3-test1",
-  "sourceVersionCode": 96,
+  "sourceVersion": "0.1.3-test2",
+  "sourceVersionCode": 97,
   "snapshotDate": "2026-11-05",
-  "sourceBaseline": "0.1.2-test92 plus wallet-only cleanup",
+  "sourceBaseline": "0.1.2-test92 plus wallet-only cleanup and campus region extension",
   "type": "Android source reference library; not an installable APK",
   "walletJavaFiles": 22,
   "exportChanges": [
@@ -13,10 +13,10 @@
   ],
   "files": [
     {
-      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/BeijingStudentCardCompat.java",
-      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/BeijingStudentCardCompat.java",
-      "sourceSha256": "c956b8b329f1ad0929827c647856c384ce6a5eba8996c64dbd4b1ef243e475f4",
-      "sha256": "c956b8b329f1ad0929827c647856c384ce6a5eba8996c64dbd4b1ef243e475f4",
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCampusCardCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCampusCardCompat.java",
+      "sourceSha256": "376f49aa388e034b4d2ac96b8f4fcd673f1b0da07185ad23d7aeb843bddf1ffc",
+      "sha256": "376f49aa388e034b4d2ac96b8f4fcd673f1b0da07185ad23d7aeb843bddf1ffc",
       "modifiedForExport": false
     },
     {
@@ -240,8 +240,8 @@
       "source": "wallet-porting-reference/examples/WalletOnlyModule.java",
       "path": "examples/WalletOnlyModule.java",
       "sourceSha256": "763e0ffae30102ca651dfa8084df0c12744d96ae625b12ce7be85821d6717a24",
-      "sha256": "763e0ffae30102ca651dfa8084df0c12744d96ae625b12ce7be85821d6717a24",
-      "modifiedForExport": false
+      "sha256": "56e401074edd27092d4ba49e5e55a7e6f17927b3262ee774b4e82f2bd9fa6e6b",
+      "modifiedForExport": true
     },
     {
       "source": "wallet-porting-reference/examples/xposed_init",

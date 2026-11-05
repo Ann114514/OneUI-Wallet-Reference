@@ -8,12 +8,12 @@
 if (WalletModule.isTarget(param.packageName)) {
     WalletModule.install(param);
     if ("com.samsung.android.spay".equals(param.packageName)) {
-        BeijingStudentCardCompat.install(param);
+        WalletCampusCardCompat.install(param);
     }
 }
 ```
 
-`BeijingStudentCardCompat` 由总入口单独调用；只复制 `WalletModule.install` 会漏掉该项。复制示例 `xposed_init` 到宿主 assets，并合并 scope 数组及 manifest metadata。参考库自身不提供应用入口、总开关或自动作用域配置。
+`WalletCampusCardCompat` 由总入口单独调用；只复制 `WalletModule.install` 会漏掉该项。复制示例 `xposed_init` 到宿主 assets，并合并 scope 数组及 manifest metadata。参考库自身不提供应用入口、总开关或自动作用域配置。
 
 ## 作用域
 

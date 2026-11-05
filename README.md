@@ -1,6 +1,6 @@
 # OneUI Wallet Reference
 
-从 **OneUI Toolbox 0.1.3-test1 / code96** 剥离的三星钱包源码，供 LSPosed 模块作者阅读和移植。保留钱包相关实现，不包含桌面、锁屏、SystemUI 等其他工具箱功能。
+从 **OneUI Toolbox 0.1.3-test2 / code97** 剥离的三星钱包源码，供 LSPosed 模块作者阅读和移植。保留钱包相关实现，不包含桌面、锁屏、SystemUI 等其他工具箱功能。
 
 本仓库是可构建的 Android **参考库**，输出 AAR，需要接入自己的 LSPosed 宿主；不是可直接安装的钱包或独立模块 APK。快照日期：2026-11-05。
 
@@ -16,7 +16,7 @@
 | --- | --- | --- |
 | 三组件地区兼容 | `WalletRegionCompat` | 汐语移植；仅改目标进程 getter 结果 |
 | 交通卡入口、城市及卡种目录 | `WalletTransitEntryCompat` | 入口和目录分别处理，保留实际服务判断 |
-| 北京一卡通校园卡地区识别兼容 | `BeijingStudentCardCompat` | 仅在匹配的校园卡资格校验中将 carrierid 的 TGY 局部映射为 CHC，不注入北京一卡通 |
+| 校园卡地区识别兼容 | `WalletCampusCardCompat` | 北京一卡通、校际通和上海校园联名卡的检查、预发卡、发卡校验内局部映射 carrierid；不注入发卡 App |
 | NFC 读写开关误报 | `WalletAccessNfcCompat` | 门卡、银行卡选择页；不全局屏蔽提醒 |
 | 门禁卡自定义卡面 | `WalletCardArtCompat` 等 | 原生设计页增加自定义、相册、裁剪、卡面库和长按删除 |
 | 公交卡独立设计页 | `WalletTransitDesignModule` 等 | 独立 Activity/编辑状态，预览后保存；恢复默认、交通联合标识设置 |
@@ -60,6 +60,6 @@ Windows 使用 `gradlew.bat`。默认通过 Xposed Maven 获取 API82；也可�
 - [验证与限制](docs/VALIDATION.md)：当前设备证据及移植边界。
 - [`snapshot.json`](snapshot.json)：源文件和发布文件的 SHA-256 对照。
 
-当前完整工具箱 0.1.3-test1 已构建并安装至基线设备。参考库构建结果见 [`publication-check.json`](publication-check.json)。编译、安装、Hook 加载和可见效果分别记录，不将其推断为所有银行/城市/固件均已通过测试。
+参考库构建结果见 [`publication-check.json`](publication-check.json)。编译、安装、Hook 加载和可见效果分别记录，不将其推断为所有银行/城市/固件均已通过测试。校园卡新增路径的原生接口已核对，实际发卡仍待相应服务验证。
 
 仓库没有账号、密码、卡号、令牌、设备日志、截图、三星 APK/DEX 或本机签名密钥。需要的三星应用及账户认证由使用者自行准备。
