@@ -1,0 +1,63 @@
+plugins { id 'com.android.library' }
+
+android {
+    namespace 'dev.oneui.toolbox'
+    compileSdk 36
+    defaultConfig { minSdk 29 }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // Supplied by LSPosed at runtime, never packaged as an app dependency.
+    if (providers.gradleProperty('xposedApiJar').isPresent()) {
+        compileOnly files(providers.gradleProperty('xposedApiJar').get())
+    } else {
+        compileOnly 'de.robv.android.xposed:api:82'
+    }
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+}
+
+// A tiny independent Activity links to Wallet's real base at runtime. Compile-only
+// declarations are excluded from both this DEX and the application's main DEX.
+def transitStubs = layout.buildDirectory.dir('transitDesign/stubs')
+def transitClasses = layout.buildDirectory.dir('transitDesign/classes')
+def transitDex = layout.buildDirectory.dir('transitDesign/dex')
+def transitAssets = layout.buildDirectory.dir('generated/transitDesignAssets')
+def compileTransitStubs = tasks.register('compileTransitStubs', JavaCompile) {
+    source fileTree('src/transitDesignStubs/java') { include '**/*.java' }
+    classpath = files(android.bootClasspath)
+    destinationDirectory = transitStubs
+    sourceCompatibility = '1.8'; targetCompatibility = '1.8'
+}
+def compileTransitActivity = tasks.register('compileTransitActivity', JavaCompile) {
+    dependsOn compileTransitStubs
+    source fileTree('src/transitDesign/java') { include '**/*.java' }
+    classpath = files(android.bootClasspath, transitStubs)
+    destinationDirectory = transitClasses
+    sourceCompatibility = '1.8'; targetCompatibility = '1.8'
+}
+def dexTransitActivity = tasks.register('dexTransitActivity', JavaExec) {
+    dependsOn compileTransitActivity
+    classpath = files(new File(android.sdkDirectory, "build-tools/${android.buildToolsVersion}/lib/d8.jar"))
+    mainClass = 'com.android.tools.r8.D8'
+    inputs.dir(transitClasses)
+    outputs.dir(transitDex)
+    doFirst {
+        transitDex.get().asFile.mkdirs()
+        args = ['--min-api', '29', '--lib', android.bootClasspath.first().absolutePath,
+                '--classpath', transitStubs.get().asFile.absolutePath,
+                '--output', transitDex.get().asFile.absolutePath]
+        args fileTree(transitClasses).matching { include '**/*.class' }.files.collect { it.absolutePath }
+    }
+}
+def prepareTransitAssets = tasks.register('prepareTransitAssets', Copy) {
+    dependsOn dexTransitActivity
+    from(transitDex) { include 'classes.dex'; rename { 'transit_design_activity.dex' } }
+    into transitAssets
+}
+android.sourceSets.main.assets.srcDir(transitAssets)
+tasks.named('preBuild').configure { dependsOn prepareTransitAssets }

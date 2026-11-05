@@ -1,0 +1,309 @@
+{
+  "name": "OneUI Wallet Reference",
+  "sourceVersion": "0.1.3-test1",
+  "sourceVersionCode": 96,
+  "snapshotDate": "2026-11-05",
+  "sourceBaseline": "0.1.2-test92 plus wallet-only cleanup",
+  "type": "Android source reference library; not an installable APK",
+  "walletJavaFiles": 23,
+  "exportChanges": [
+    "WalletRegionCompat attribution comment only; reference build files and examples are packaging additions",
+    "PASS-FLOW waiting UI paragraph describes current behavior without historic test iteration labels"
+  ],
+  "files": [
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/BeijingStudentCardCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/BeijingStudentCardCompat.java",
+      "sourceSha256": "c956b8b329f1ad0929827c647856c384ce6a5eba8996c64dbd4b1ef243e475f4",
+      "sha256": "c956b8b329f1ad0929827c647856c384ce6a5eba8996c64dbd4b1ef243e475f4",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/PassPreparationState.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/PassPreparationState.java",
+      "sourceSha256": "4c8f2f7e6fb9074cd169f392b58433d60c5d79a7cd63217cc718a772897aec14",
+      "sha256": "4c8f2f7e6fb9074cd169f392b58433d60c5d79a7cd63217cc718a772897aec14",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletAccessNfcCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletAccessNfcCompat.java",
+      "sourceSha256": "a02ff53225a499383b88de2dbf676a8f6ad9f0e94abd00389b92b9652ddaee00",
+      "sha256": "a02ff53225a499383b88de2dbf676a8f6ad9f0e94abd00389b92b9652ddaee00",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtCompat.java",
+      "sourceSha256": "04c8074de3d58f75b6829339ba9b043b616991da371506428dc12549f90f5a48",
+      "sha256": "04c8074de3d58f75b6829339ba9b043b616991da371506428dc12549f90f5a48",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtCropView.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtCropView.java",
+      "sourceSha256": "424a3a49e0e8cffb24c0039106f19200b452a28deb2b1d130ce98dcb0bfcb255",
+      "sha256": "424a3a49e0e8cffb24c0039106f19200b452a28deb2b1d130ce98dcb0bfcb255",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtLibraryView.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtLibraryView.java",
+      "sourceSha256": "961c90bcf57a699087da5060ef610fdc2c02749599f392b6f05d9f18010ad5c6",
+      "sha256": "961c90bcf57a699087da5060ef610fdc2c02749599f392b6f05d9f18010ad5c6",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtNameContrast.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtNameContrast.java",
+      "sourceSha256": "b840c927df80de1ba732927d16a1fc6334c5b6cbe600298848215d7c8cdbc480",
+      "sha256": "b840c927df80de1ba732927d16a1fc6334c5b6cbe600298848215d7c8cdbc480",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtStore.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletCardArtStore.java",
+      "sourceSha256": "757ddedfa03457e6ae5c0b49c9f3c71d4b3ce618300299720d47b62b33045a26",
+      "sha256": "757ddedfa03457e6ae5c0b49c9f3c71d4b3ce618300299720d47b62b33045a26",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletDownloadsActivity.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletDownloadsActivity.java",
+      "sourceSha256": "11e2511b246b7cabfa9fc838f27b90b618bc75f73f471720a74d310d28a98038",
+      "sha256": "11e2511b246b7cabfa9fc838f27b90b618bc75f73f471720a74d310d28a98038",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletModule.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletModule.java",
+      "sourceSha256": "4225b637e83200028cce706aca5c26267276f08a7c59dbfd0faf20028eda0298",
+      "sha256": "4225b637e83200028cce706aca5c26267276f08a7c59dbfd0faf20028eda0298",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassConnectFlow.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassConnectFlow.java",
+      "sourceSha256": "707ef84df8f69502d1b13dd6c4260be69e03a8f1fc9384f082b8613324115846",
+      "sha256": "707ef84df8f69502d1b13dd6c4260be69e03a8f1fc9384f082b8613324115846",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassDataReloadCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassDataReloadCompat.java",
+      "sourceSha256": "aaa726c72839e06404335061bc98fe0ba602c81493917b41a53e5d7713306eb6",
+      "sha256": "aaa726c72839e06404335061bc98fe0ba602c81493917b41a53e5d7713306eb6",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassEntryCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassEntryCompat.java",
+      "sourceSha256": "f4d0a25c19b2e2c2dcac58c5829b3755df0798e9130a958a2b71e88435fccc5e",
+      "sha256": "f4d0a25c19b2e2c2dcac58c5829b3755df0798e9130a958a2b71e88435fccc5e",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassPendingStore.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassPendingStore.java",
+      "sourceSha256": "952984337042664c9b2ae2e3c7b61424cebeb88f5d13def017f6d05185cde4ec",
+      "sha256": "952984337042664c9b2ae2e3c7b61424cebeb88f5d13def017f6d05185cde4ec",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassRegistrationCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletPassRegistrationCompat.java",
+      "sourceSha256": "f3a754a89e0ab304517209c0f8111b68b1d8765407b7127d7525a51cdfc9c340",
+      "sha256": "f3a754a89e0ab304517209c0f8111b68b1d8765407b7127d7525a51cdfc9c340",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java",
+      "sourceSha256": "2874c4bf8e48b890f1cbcd822b959e04cec581aa6cf044605c23e972a2935acd",
+      "sha256": "b64b97323434ece8a175acefae7fc5bf30461a610d59c91ea92e98b93815ae43",
+      "modifiedForExport": true
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTapArtCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTapArtCompat.java",
+      "sourceSha256": "f8a0b07a7dda45d786ea75a588a33dfa6c3c701732913d680b332cf1c03236e1",
+      "sha256": "f8a0b07a7dda45d786ea75a588a33dfa6c3c701732913d680b332cf1c03236e1",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtBindings.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtBindings.java",
+      "sourceSha256": "a2a01092dafd59cfba1fd45d7ddd18ce8773880b117faf5ab3878ebd484256d1",
+      "sha256": "a2a01092dafd59cfba1fd45d7ddd18ce8773880b117faf5ab3878ebd484256d1",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtCompat.java",
+      "sourceSha256": "419f2a1102de0f4f3a61e92756a668193123b580c95935559ff2269c87221c7a",
+      "sha256": "419f2a1102de0f4f3a61e92756a668193123b580c95935559ff2269c87221c7a",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtPanel.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardArtPanel.java",
+      "sourceSha256": "5df61b701682fd124be6894087634110b150e9a147640f3f9f473eaa55775306",
+      "sha256": "5df61b701682fd124be6894087634110b150e9a147640f3f9f473eaa55775306",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardLogo.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitCardLogo.java",
+      "sourceSha256": "e3601ce21f8f535023650e9bd8d22e4c4c553480ec837c8ae5763a0e05069b34",
+      "sha256": "e3601ce21f8f535023650e9bd8d22e4c4c553480ec837c8ae5763a0e05069b34",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitDesignModule.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitDesignModule.java",
+      "sourceSha256": "e0570e7cf2df9bf691a6a672afbcb0f97489c3e823f9d47770d51e697b610195",
+      "sha256": "e0570e7cf2df9bf691a6a672afbcb0f97489c3e823f9d47770d51e697b610195",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitEntryCompat.java",
+      "path": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletTransitEntryCompat.java",
+      "sourceSha256": "290c6b23db8084f69a3f5875660d3f765de1a9ee69712a2574647278d7ceb881",
+      "sha256": "290c6b23db8084f69a3f5875660d3f765de1a9ee69712a2574647278d7ceb881",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/transitDesign/java/dev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity.java",
+      "path": "wallet-reference/src/transitDesign/java/dev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity.java",
+      "sourceSha256": "20a7f43bb957d4aee853c83f555125478d71617216d56d04c5e26c18b66ccf49",
+      "sha256": "20a7f43bb957d4aee853c83f555125478d71617216d56d04c5e26c18b66ccf49",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/transitDesignStubs/java/androidx/activity/OnBackPressedCallback.java",
+      "path": "wallet-reference/src/transitDesignStubs/java/androidx/activity/OnBackPressedCallback.java",
+      "sourceSha256": "7d2a1f5abe73c9b8e51d0589308210005abbd778fdf66d0de7f9d2ce7d55c05c",
+      "sha256": "7d2a1f5abe73c9b8e51d0589308210005abbd778fdf66d0de7f9d2ce7d55c05c",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/transitDesignStubs/java/androidx/activity/OnBackPressedDispatcher.java",
+      "path": "wallet-reference/src/transitDesignStubs/java/androidx/activity/OnBackPressedDispatcher.java",
+      "sourceSha256": "a6fd2c9217c933acb6afe5b71228833ae575d6ca91be058c1818a8f605caac00",
+      "sha256": "a6fd2c9217c933acb6afe5b71228833ae575d6ca91be058c1818a8f605caac00",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/transitDesignStubs/java/androidx/lifecycle/LifecycleOwner.java",
+      "path": "wallet-reference/src/transitDesignStubs/java/androidx/lifecycle/LifecycleOwner.java",
+      "sourceSha256": "87d70645e01bc2b2f0284aa4f821b24e135579dd46a6020a07f0d5fc2fc552ce",
+      "sha256": "87d70645e01bc2b2f0284aa4f821b24e135579dd46a6020a07f0d5fc2fc552ce",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/transitDesignStubs/java/com/samsung/android/spay/common/ui/SpayBaseActivity.java",
+      "path": "wallet-reference/src/transitDesignStubs/java/com/samsung/android/spay/common/ui/SpayBaseActivity.java",
+      "sourceSha256": "06570c0bec565c741d01174bfed7f805fbd15fbfdd0f33df4cbb619533062ef5",
+      "sha256": "06570c0bec565c741d01174bfed7f805fbd15fbfdd0f33df4cbb619533062ef5",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/assets/transit_union_logo.png",
+      "path": "wallet-reference/src/main/assets/transit_union_logo.png",
+      "sourceSha256": "41778eb44df9a3b5e14476be30ff45b210ae7f0fa3f086e6f9a92ded6acb2273",
+      "sha256": "41778eb44df9a3b5e14476be30ff45b210ae7f0fa3f086e6f9a92ded6acb2273",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/res/values/wallet_downloads.xml",
+      "path": "wallet-reference/src/main/res/values/wallet_downloads.xml",
+      "sourceSha256": "fc2b255997932e8cf973cefc3a48be207671109b354965d37c0b92b7d542fc0c",
+      "sha256": "fc2b255997932e8cf973cefc3a48be207671109b354965d37c0b92b7d542fc0c",
+      "modifiedForExport": false
+    },
+    {
+      "source": "app/src/main/res/drawable/ic_arrow_back.xml",
+      "path": "wallet-reference/src/main/res/drawable/ic_arrow_back.xml",
+      "sourceSha256": "43298ed6c9c655c0df2c91242199eb31e9b010d6d2ed6c42144fdf627ad30bfb",
+      "sha256": "43298ed6c9c655c0df2c91242199eb31e9b010d6d2ed6c42144fdf627ad30bfb",
+      "modifiedForExport": false
+    },
+    {
+      "source": "gradlew",
+      "path": "gradlew",
+      "sourceSha256": "d2f351cc4d1d088f1ca59c12df28ec27dacc43a97607c056b0c0d549eda44a13",
+      "sha256": "d2f351cc4d1d088f1ca59c12df28ec27dacc43a97607c056b0c0d549eda44a13",
+      "modifiedForExport": false
+    },
+    {
+      "source": "gradlew.bat",
+      "path": "gradlew.bat",
+      "sourceSha256": "57931b17dd228e5c24dac90e815d0bf82477e831a4618dfab4136f5446b42a9f",
+      "sha256": "57931b17dd228e5c24dac90e815d0bf82477e831a4618dfab4136f5446b42a9f",
+      "modifiedForExport": false
+    },
+    {
+      "source": "gradle/wrapper/gradle-wrapper.jar",
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "sourceSha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f",
+      "sha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f",
+      "modifiedForExport": false
+    },
+    {
+      "source": "gradle/wrapper/gradle-wrapper.properties",
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "sourceSha256": "e22bb9f2985117bb281e0cd0c6b8e8c6f11fdd53e8744930ee10bea202543d78",
+      "sha256": "e22bb9f2985117bb281e0cd0c6b8e8c6f11fdd53e8744930ee10bea202543d78",
+      "modifiedForExport": false
+    },
+    {
+      "source": "wallet-porting-reference/examples/WalletOnlyModule.java",
+      "path": "examples/WalletOnlyModule.java",
+      "sourceSha256": "763e0ffae30102ca651dfa8084df0c12744d96ae625b12ce7be85821d6717a24",
+      "sha256": "763e0ffae30102ca651dfa8084df0c12744d96ae625b12ce7be85821d6717a24",
+      "modifiedForExport": false
+    },
+    {
+      "source": "wallet-porting-reference/examples/xposed_init",
+      "path": "examples/xposed_init",
+      "sourceSha256": "a0869545ba4eb838b16e9ecadfa2c9e137855dff7cb39de3c836b833f6772d0e",
+      "sha256": "a0869545ba4eb838b16e9ecadfa2c9e137855dff7cb39de3c836b833f6772d0e",
+      "modifiedForExport": false
+    },
+    {
+      "source": "wallet-porting-reference/examples/xposed_scope.xml",
+      "path": "examples/xposed_scope.xml",
+      "sourceSha256": "0529f230a155b9ba95d07ef49a5781ea4b35e73252d6939a3c004b47956bf2d5",
+      "sha256": "0529f230a155b9ba95d07ef49a5781ea4b35e73252d6939a3c004b47956bf2d5",
+      "modifiedForExport": false
+    },
+    {
+      "source": "wallet-porting-reference/examples/manifest-snippet.xml",
+      "path": "examples/manifest-snippet.xml",
+      "sourceSha256": "90f44c9ac4a6adf9f4696038c60c10d25ea89cdfd574f228c08029c99f6b31f9",
+      "sha256": "90f44c9ac4a6adf9f4696038c60c10d25ea89cdfd574f228c08029c99f6b31f9",
+      "modifiedForExport": false
+    },
+    {
+      "source": "wallet-porting-reference/docs/PASS-FLOW.md",
+      "path": "docs/PASS-FLOW.md",
+      "sourceSha256": "9e570148520541f3fd205309c764881cfc7ecaef0898d2bdd5bbecacf634e67d",
+      "sha256": "c3b759cca09ca5b16382ed680a2fe2b597f9701fa242bb958be19f8d927b9c58",
+      "modifiedForExport": true
+    },
+    {
+      "source": "wallet-porting-reference/wallet-reference/src/main/AndroidManifest.xml",
+      "path": "wallet-reference/src/main/AndroidManifest.xml",
+      "sourceSha256": "184bb1e5ad4625dd2e97a99119b6486aa8fd99b65908f7205d5d436e6ffa628e",
+      "sha256": "184bb1e5ad4625dd2e97a99119b6486aa8fd99b65908f7205d5d436e6ffa628e",
+      "modifiedForExport": false
+    },
+    {
+      "source": "gradle.properties",
+      "path": "gradle.properties",
+      "sourceSha256": "152df65b3df7e04769b42d11665070d5a4e7e90a09e5f95b73e6851be2aa4533",
+      "sha256": "152df65b3df7e04769b42d11665070d5a4e7e90a09e5f95b73e6851be2aa4533",
+      "modifiedForExport": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "XiYu / 汐语",
+  "sourceVersion": "3.0/code8",
+  "sourcePackage": "com.keyscafe.unlock",
+  "upstreamUrl": "https://github.com/qiaoing888/XiYu",
+  "upstreamStatusChecked": "2026-11-05: GitHub API HTTP 404",
+  "originalBranch": "kg0/fg0/l9/db wallet region getter mapping",
+  "portedFile": "wallet-reference/src/main/java/dev/oneui/toolbox/samsung/wallet/WalletRegionCompat.java",
+  "targets": [
+    "com.samsung.android.spay",
+    "com.samsung.android.spayfw",
+    "com.unionpay.tsmservice"
+  ],
+  "behavior": "Getter results only: CHC, CN, China; no global system-property writes",
+  "toolboxAdaptation": "Legacy Xposed API82 bootstrap, return-type/signature guards and failure isolation",
+  "notFromThisPort": [
+    "Transit entry/catalog",
+    "wallet-side campus card",
+    "NFC warning",
+    "custom artwork",
+    "Samsung Pass integration"
+  ],
+  "licenseEvidence": "Source APK contains GPLv3 reference; complete upstream license/file scope not independently obtained",
+  "selectedDexSha256": "57f87992d73aa551fc44615e9a1b780dc7ccb7c490a7905c0a3c3bd51d2145a5",
+  "binariesIncluded": false
+}

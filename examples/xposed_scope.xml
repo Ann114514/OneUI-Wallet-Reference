@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="xposed_scope">
+        <item>com.samsung.android.spay</item>
+        <item>com.samsung.android.spayfw</item>
+        <item>com.unionpay.tsmservice</item>
+        <item>com.samsung.android.samsungpass</item>
+    </string-array>
+</resources>

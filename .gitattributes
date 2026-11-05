@@ -1,0 +1,2 @@
+# Keep snapshot source bytes unchanged across platforms for SHA-256 verification.
+* -text

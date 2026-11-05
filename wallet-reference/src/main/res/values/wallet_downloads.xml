@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Independent integration points for the three user-supplied download pages. -->
+    <string name="wallet_app_download_url" translatable="false"></string>
+    <string name="wallet_framework_download_url" translatable="false"></string>
+    <string name="wallet_unionpay_download_url" translatable="false"></string>
+</resources>

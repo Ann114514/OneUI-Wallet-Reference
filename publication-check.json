@@ -1,0 +1,34 @@
+{
+  "snapshot": "0.1.3-test1",
+  "date": "2026-11-05",
+  "referenceBuild": {
+    "task": ":wallet-reference:assembleDebug",
+    "result": "BUILD SUCCESSFUL",
+    "xposedApi": "Local API82 JAR, compileOnly; no API JAR bundled",
+    "aarSha256": "8b7cb56532c49ab2d5f37214870000f2cc19b97580c9625eca04b03f56f8895c",
+    "activityAssetClasses": [
+      "Ldev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity$1;",
+      "Ldev/oneui/toolbox/samsung/wallet/transit/TransitDesignActivity;"
+    ],
+    "compileStubsPackaged": false,
+    "logoAssetMatchesSource": true
+  },
+  "sourceSnapshot": {
+    "walletJavaFiles": 23,
+    "copiedFileHashesVerified": 42,
+    "onlyBusinessSourceExportChange": "WalletRegionCompat attribution comment",
+    "gitPreservesSnapshotBytes": true
+  },
+  "publicationScope": {
+    "candidateTrackedFiles": 56,
+    "onlyBinarySourceFiles": [
+      "gradle/wrapper/gradle-wrapper.jar",
+      "wallet-reference/src/main/assets/transit_union_logo.png"
+    ],
+    "localPathsDeviceSerialsPrivateKeyTokenPatterns": "No matches in candidate text files",
+    "deviceLogsScreenshotsAccountsCardsPasswordDataIncluded": false,
+    "samsungApkOrDexIncluded": false,
+    "buildOutputsIncluded": false
+  },
+  "runtimeClaim": "Reference build and packaging only. Device acceptance boundaries are documented in docs/VALIDATION.md."
+}
